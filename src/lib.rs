@@ -10,11 +10,11 @@ impl<'a> Lexer<'a> {
 
 	fn is_ws(ch: u8) -> bool {
 		match ch {
-			b' '	=> true,
-			b'\r'	=> true,
-			b'\n'	=> true,
-			b'\t'	=> true,
-			_		=> false,
+			b' '  => true,
+			b'\r' => true,
+			b'\n' => true,
+			b'\t' => true,
+			_     => false,
 		}
 	}
 }
@@ -26,8 +26,8 @@ impl<'a> Lexer<'a> {
 
 	fn ch(&self) -> Option<u8> {
 		match self.eof() {
-			true	=> None,
-			false	=> Some(self.src[self.pos])
+			true  => None,
+			false => Some(self.src[self.pos])
 		}
 	}
 
@@ -37,10 +37,10 @@ impl<'a> Lexer<'a> {
 		loop {
 			let ch = self.ch();
 			match ch {
-				Some(c) if Lexer::is_ws(c)	=> break,
-				Some(b'"')					=> break,
-				None						=> break,
-				_							=> ()
+				Some(c) if Lexer::is_ws(c) => break,
+				Some(b'"')                 => break,
+				None                       => break,
+				_                          => ()
 			}
 
 			tok.push(ch.unwrap());
@@ -60,9 +60,9 @@ impl<'a> Lexer<'a> {
 		loop {
 			let ch = self.ch();
 			match ch {
-				Some(b'"')		=> { self.pos += 1; break; },
-				None			=> break,
-				_				=> ()
+				Some(b'"') => { self.pos += 1; break; },
+				None       => break,
+				_          => ()
 			}
 
 			tok.push(ch.unwrap());
@@ -97,9 +97,9 @@ impl<'a> Iterator for Lexer<'a> {
 	fn next(&mut self) -> Option<String> {
 		self.skip_ws();
 		match self.ch() {
-			Some(b'"')	=> self.quoted_string(),
-			Some(_)		=> self.string(),
-			None		=> None
+			Some(b'"') => self.quoted_string(),
+			Some(_)    => self.string(),
+			None       => None
 		}
 	}
 }
