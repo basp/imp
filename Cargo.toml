@@ -2,3 +2,10 @@
 name = "imp"
 version = "0.1.0"
 authors = ["Bas Pennings <baspster@gmail.com>"]
+
+[lib]
+name = "imp"
+
+[[bin]]
+name = "imp"
+doc = false
